@@ -177,7 +177,6 @@
       margin-bottom: 60px;
     }
     .concept-card {
-      min-height: 80vh;
       border-radius: var(--border-radius);
       padding: 40px 24px;
       display: flex;
@@ -235,10 +234,12 @@
       align-items: flex-start;
       gap: 24px;
       overflow-x: auto;
+      overflow-y: hidden;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       scroll-behavior: smooth;
+      transition: height 0.3s ease-out;
     }
     .concept-slider::-webkit-scrollbar {
       display: none;
@@ -681,11 +682,45 @@
       
       cards.forEach(card => observer.observe(card));
       
-      // Slider navigation
+      // Dynamic slider height adjustment
+      const adjustSliderHeight = (slider) => {
+        const slides = slider.querySelectorAll('.concept-slide');
+        const sliderRect = slider.getBoundingClientRect();
+        let activeSlide = slides[0];
+        let maxVisibility = 0;
+        
+        slides.forEach(slide => {
+          const rect = slide.getBoundingClientRect();
+          const visibleWidth = Math.min(rect.right, sliderRect.right) - Math.max(rect.left, sliderRect.left);
+          if (visibleWidth > maxVisibility) {
+            maxVisibility = visibleWidth;
+            activeSlide = slide;
+          }
+        });
+        
+        if (activeSlide) {
+          const img = activeSlide.querySelector('img');
+          if (img && img.complete) {
+            slider.style.height = activeSlide.offsetHeight + 'px';
+          } else if (img) {
+            img.addEventListener('load', () => {
+              slider.style.height = activeSlide.offsetHeight + 'px';
+            });
+          }
+        }
+      };
+
+      // Slider logic
       document.querySelectorAll('.concept-slider-wrapper').forEach(wrapper => {
         const slider = wrapper.querySelector('.concept-slider');
         const prevBtn = wrapper.querySelector('.prev-btn');
         const nextBtn = wrapper.querySelector('.next-btn');
+        
+        if (slider) {
+          adjustSliderHeight(slider);
+          slider.addEventListener('scroll', () => adjustSliderHeight(slider));
+          window.addEventListener('resize', () => adjustSliderHeight(slider));
+        }
         
         if (prevBtn && slider) {
           prevBtn.addEventListener('click', () => {
