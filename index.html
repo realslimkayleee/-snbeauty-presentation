@@ -251,7 +251,7 @@
       border-radius: 4px;
     }
     .concept-slide {
-      flex: 0 0 90%;
+      flex: 0 0 100%;
       scroll-snap-align: center;
       border-radius: 12px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -263,7 +263,39 @@
       height: auto;
       display: block;
     }
-
+    .slider-btn-container {
+      position: sticky;
+      top: 50vh;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      justify-content: space-between;
+      width: calc(100% + 48px);
+      margin-left: -24px;
+      margin-bottom: -48px;
+    }
+    .slider-btn {
+      pointer-events: auto;
+      background: #fff;
+      border: 1px solid var(--divider);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--fg-color);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .slider-btn:hover {
+      background: #fdfdfd;
+      transform: scale(1.05);
+    }
+    .slider-btn:active {
+      transform: scale(0.95);
+    }
 
     /* Palette Row */
     .palette-row {
@@ -567,7 +599,15 @@
       <div class="concept-slider-wrapper">
         <div class="slider-hint">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Swipe or scroll horizontally to see more pages
+          Swipe or scroll horizontally or use the buttons to see more pages
+        </div>
+        <div class="slider-btn-container">
+          <button class="slider-btn prev-btn" aria-label="Previous image">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="slider-btn next-btn" aria-label="Next image">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
         </div>
         <div class="concept-slider">
           <div class="concept-slide"><img src="./concept-a/treatments.png" alt="Clinical Authority Treatments Page"></div>
@@ -587,7 +627,15 @@
       <div class="concept-slider-wrapper">
         <div class="slider-hint">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Swipe or scroll horizontally to see more pages
+          Swipe or scroll horizontally or use the buttons to see more pages
+        </div>
+        <div class="slider-btn-container">
+          <button class="slider-btn prev-btn" aria-label="Previous image">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="slider-btn next-btn" aria-label="Next image">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
         </div>
         <div class="concept-slider">
           <div class="concept-slide"><img src="./concept-b/services.png" alt="Serene Narrative Services Page"></div>
@@ -639,6 +687,24 @@
       });
       
       cards.forEach(card => observer.observe(card));
+      
+      // Slider navigation
+      document.querySelectorAll('.concept-slider-wrapper').forEach(wrapper => {
+        const slider = wrapper.querySelector('.concept-slider');
+        const prevBtn = wrapper.querySelector('.prev-btn');
+        const nextBtn = wrapper.querySelector('.next-btn');
+        
+        if (prevBtn && slider) {
+          prevBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' });
+          });
+        }
+        if (nextBtn && slider) {
+          nextBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' });
+          });
+        }
+      });
     });
   </script>
 </body>
