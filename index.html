@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Presentation · SN Beauty</title>
+  <title>Presentation · SN Beauty Medical Spa</title>
   
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   
@@ -60,7 +60,36 @@
       font-size: 0.75rem;
     }
 
+    /* Sticky Nav */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(247, 244, 238, 0.85);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--divider);
+    }
+    .nav-tab {
+      text-decoration: none;
+      color: var(--fg-color);
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      background-color: rgba(0, 0, 0, 0.04);
+      transition: background-color 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .nav-tab:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+    }
+
     /* Layout utilities */
+    #seo-audit, #concept-a, #concept-b, #next-steps {
+      scroll-margin-top: 120px;
+    }
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -154,13 +183,9 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      opacity: 0; /* for observer */
-      transform: translateY(20px);
-      transition: opacity 400ms ease, transform 400ms ease;
     }
     .concept-card.visible {
-      opacity: 1;
-      transform: translateY(0);
+      /* legacy class */
     }
     
     @media (min-width: 1280px) {
@@ -186,6 +211,90 @@
       opacity: 0.9;
       max-width: 480px;
       margin-bottom: 40px;
+    }
+
+    /* Concept Image Slider */
+    .concept-slider-wrapper {
+      margin-top: 40px;
+    }
+    .slider-hint {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--fg-color);
+      opacity: 0.6;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .concept-slider {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 16px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0,0,0,0.2) rgba(0,0,0,0.05);
+      scroll-behavior: smooth;
+    }
+    .concept-slider::-webkit-scrollbar {
+      height: 8px;
+    }
+    .concept-slider::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.05);
+      border-radius: 4px;
+    }
+    .concept-slider::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.2);
+      border-radius: 4px;
+    }
+    .concept-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      background-color: #fff;
+      overflow: hidden;
+    }
+    .concept-slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .slider-btn-container {
+      position: sticky;
+      top: 50vh;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      justify-content: space-between;
+      width: calc(100% + 48px);
+      margin-left: -24px;
+      margin-bottom: -48px;
+    }
+    .slider-btn {
+      pointer-events: auto;
+      background: #fff;
+      border: 1px solid var(--divider);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--fg-color);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .slider-btn:hover {
+      background: #fdfdfd;
+      transform: scale(1.05);
+    }
+    .slider-btn:active {
+      transform: scale(0.95);
     }
 
     /* Palette Row */
@@ -335,21 +444,33 @@
 <body>
 
   <!-- HEADER -->
-  <header class="container" style="padding-top: 40px;">
-    <img src="assets/logo.avif" alt="SN Beauty Logo" style="height: 60px; width: auto; object-fit: contain;">
+  <header class="container" style="padding-top: 40px; padding-bottom: 20px;">
+    <h2 class="font-display" style="font-size: 1.5rem; letter-spacing: 0.05em; text-transform: uppercase;">SN BEAUTY MEDICAL SPA</h2>
   </header>
+
+  <!-- NAVIGATION -->
+  <nav class="sticky-nav">
+    <div class="container" style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; padding: 12px 20px;">
+      <a href="#seo-audit" class="nav-tab">SEO Audit</a>
+      <a href="#concept-a" class="nav-tab">Concept A</a>
+      <a href="#concept-b" class="nav-tab">Concept B</a>
+      <a href="#next-steps" class="nav-tab">Next Steps</a>
+    </div>
+  </nav>
 
   <!-- HERO -->
   <section class="hero container" style="padding-top: 40px; padding-bottom: 20px;">
     <div class="hero-content">
-      <span class="overline stagger-1">PRESENTATION &middot; SN BEAUTY</span>
+      <span class="overline stagger-1">PRESENTATION &middot; SN BEAUTY MEDICAL SPA</span>
       <h1 class="stagger-2">
         Two directions. One website. Your call.
         <svg class="underline-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 20" preserveAspectRatio="none">
           <path d="M0,10 Q100,20 200,5 T400,10" fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linecap="round"/>
         </svg>
       </h1>
-      <p class="stagger-3">Scroll down to view the full website concepts.<br>Each direction presents a unique vision for SN Beauty.</p>
+      <p class="stagger-3" style="font-size: 1.15rem; margin-top: 16px; max-width: 600px; line-height: 1.6;">
+        Two things inside: an honest look at how your current site is doing in search, and two fresh design directions we built for you. Nothing to decide today — just take a look.
+      </p>
     </div>
     <div class="stagger-4" style="margin-top: 50px; padding-bottom: 30px; opacity: 0.5; animation: bounce 2s infinite; display: flex;">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -364,18 +485,18 @@
     <div class="container">
       <h3 class="font-display" style="font-size: 2rem; margin-bottom: 24px;">How this works</h3>
       <ol>
-        <li>Scroll through the complete designs for each concept below.</li>
-        <li>Take your time comparing the visual directions and overall aesthetic.</li>
-        <li>When you've found a direction you love, reach out to Kaylee King at Cairn Agency (<a href="tel:4692671358" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">469-267-1358</a>). We'll schedule a call at your convenience to answer any questions and map out our next steps.</li>
+        <li><strong>Start with the SEO audit</strong> so you can see exactly where your site stands right now.</li>
+        <li><strong>Scroll through both design concepts.</strong> Take your time — compare the look, the feel, and which one sounds more like you.</li>
+        <li><strong>Come to our call Wednesday</strong> with whichever direction you're leaning toward (or a list of questions — both are great). We'll map out next steps together. Anything you want to ask before then, reach me at <a href="tel:4692671358" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">469-267-1358</a>.</li>
       </ol>
       <div class="scroll-cue" style="margin-top: 32px; opacity: 0.8; animation-delay: 1s;">
-        Scroll to compare concepts <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        Scroll down to compare &darr;
       </div>
     </div>
   </section>
 
   <!-- SEO REPORT -->
-  <section class="container" style="padding: 60px 20px; border-bottom: 1px solid var(--divider); margin-bottom: 40px;">
+  <section id="seo-audit" class="container" style="padding: 60px 20px; border-bottom: 1px solid var(--divider); margin-bottom: 40px;">
     <h3 class="font-display" style="font-size: 2.5rem; margin-bottom: 16px;">Current SEO Performance</h3>
     <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 40px; max-width: 700px;">
       Here is a plain-English breakdown of your website's current search performance. Each score measures a different aspect of your site, explaining what it means for your business.
@@ -452,7 +573,7 @@
         <p style="font-size: 0.9rem; font-weight: 600; color: #666; margin-bottom: 8px;">What it measures:</p>
         <p style="font-size: 0.95rem; margin-bottom: 16px; line-height: 1.5;">How many other trusted websites link to yours. Search engines treat these like recommendations.</p>
         <p style="font-size: 0.9rem; font-weight: 600; color: #666; margin-bottom: 8px;">Your score:</p>
-        <p style="font-size: 0.95rem; margin: 0; line-height: 1.5;">This is the biggest area for improvement. Very few quality websites currently link to yours, which holds back your ranking. Getting listed in trusted local and industry directories is the single most valuable step we can take.</p>
+        <p style="font-size: 0.95rem; margin: 0; line-height: 1.5;"><strong>Needs work.</strong> This is the biggest area for improvement. Very few quality websites currently link to yours, which holds back your ranking. Getting listed in trusted local and industry directories is the single most valuable step we can take.</p>
       </div>
 
     </div>
@@ -462,81 +583,68 @@
   <section class="container concepts">
     
     <!-- Concept A -->
-    <article class="concept-card card-a">
+    <article id="concept-a" class="concept-card card-a">
       <span class="overline">CONCEPT A</span>
       <h2>Clinical Authority</h2>
       <p class="one-liner">Reassuring, factual, and meticulous.</p>
       <p class="desc">A premium medical spa identity rooted in "Clinical Authority." The aesthetic balances technical proficiency with aesthetic elegance, utilizing a Modern Corporate style infused with Minimalism.</p>
       
-      <div class="palette-row">
-        <div class="swatch-group">
-          <div class="swatch" style="background-color: #fff8f4;"></div>
-          <span class="mono swatch-hex">#FFF8F4</span>
+      <div class="concept-slider-wrapper">
+        <div class="slider-hint">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Swipe or scroll horizontally or use the buttons to see more pages
         </div>
-        <div class="swatch-group">
-          <div class="swatch" style="background-color: #003b38;"></div>
-          <span class="mono swatch-hex">#003B38</span>
+        <div class="slider-btn-container">
+          <button class="slider-btn prev-btn" aria-label="Previous image">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="slider-btn next-btn" aria-label="Next image">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
         </div>
-        <div class="swatch-group">
-          <div class="swatch" style="background-color: #56615c;"></div>
-          <span class="mono swatch-hex">#56615C</span>
+        <div class="concept-slider">
+          <div class="concept-slide"><img src="./concept-a/treatments.png" alt="Clinical Authority Treatments Page"></div>
+          <div class="concept-slide"><img src="./concept-a/gallery.png" alt="Clinical Authority Gallery Page"></div>
+          <div class="concept-slide"><img src="./concept-a/contact_faq.png" alt="Clinical Authority Contact & FAQ Page"></div>
         </div>
-        <div class="swatch-group">
-          <div class="swatch" style="background-color: #852c18;"></div>
-          <span class="mono swatch-hex">#852C18</span>
-        </div>
-      </div>
-      
-      <div class="concept-image-container" style="margin-top: 40px; display: flex; flex-direction: column; gap: 24px;">
-        <img src="concept-a/home.png" alt="Clinical Authority Home Page" style="width: 100%; display: block; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-        <img src="concept-a/treatments.png" alt="Clinical Authority Treatments Page" style="width: 100%; display: block; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-        <img src="concept-a/gallery.png" alt="Clinical Authority Gallery Page" style="width: 100%; display: block; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-        <img src="concept-a/contact_faq.png" alt="Clinical Authority Contact & FAQ Page" style="width: 100%; display: block; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
       </div>
     </article>
 
     <!-- Concept B -->
-    <article class="concept-card card-b">
+    <article id="concept-b" class="concept-card card-b">
       <span class="overline">CONCEPT B</span>
       <h2>Serene Narrative</h2>
       <p class="one-liner">A philosophy that prioritizes the internal experience over external flash.</p>
       <p class="desc">Quiet Luxury for a discerning audience. Anchored in Minimalism with a high-fashion Editorial influence. Warm neutrals mimicking tactile materials of a luxury sanctuary.</p>
       
-      <div class="palette-row">
-        <div class="swatch-group">
-          <div class="swatch" style="background-color: #fdf8f7;"></div>
-          <span class="mono swatch-hex">#FDF8F7</span>
+      <div class="concept-slider-wrapper">
+        <div class="slider-hint">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Swipe or scroll horizontally or use the buttons to see more pages
         </div>
-        <div class="swatch-group">
-          <div class="swatch" style="background-color: #1c1b1b;"></div>
-          <span class="mono swatch-hex">#1C1B1B</span>
+        <div class="slider-btn-container">
+          <button class="slider-btn prev-btn" aria-label="Previous image">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="slider-btn next-btn" aria-label="Next image">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
         </div>
-        <div class="swatch-group">
-          <div class="swatch" style="background-color: #e6e2e0;"></div>
-          <span class="mono swatch-hex">#E6E2E0</span>
+        <div class="concept-slider">
+          <div class="concept-slide"><img src="./concept-b/services.png" alt="Serene Narrative Services Page"></div>
+          <div class="concept-slide"><img src="./concept-b/gallery.png" alt="Serene Narrative Gallery Page"></div>
+          <div class="concept-slide"><img src="./concept-b/the_founder.png" alt="Serene Narrative Founder Page"></div>
+          <div class="concept-slide"><img src="./concept-b/policy_faq.png" alt="Serene Narrative Policy & FAQ Page"></div>
         </div>
-        <div class="swatch-group">
-          <div class="swatch" style="background-color: #79564e;"></div>
-          <span class="mono swatch-hex">#79564E</span>
-        </div>
-      </div>
-      
-      <div class="concept-image-container" style="margin-top: 40px; display: flex; flex-direction: column; gap: 24px;">
-        <img src="concept-b/home.png" alt="Serene Narrative Home Page" style="width: 100%; display: block; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-        <img src="concept-b/about_us.png" alt="Serene Narrative About Us Page" style="width: 100%; display: block; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-        <img src="concept-b/services.png" alt="Serene Narrative Services Page" style="width: 100%; display: block; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-        <img src="concept-b/gallery.png" alt="Serene Narrative Gallery Page" style="width: 100%; display: block; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-        <img src="concept-b/the_founder.png" alt="Serene Narrative Founder Page" style="width: 100%; display: block; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-        <img src="concept-b/policy_faq.png" alt="Serene Narrative Policy & FAQ Page" style="width: 100%; display: block; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
       </div>
     </article>
 
   </section>
 
   <!-- REMINDER -->
-  <section class="container" style="padding: 80px 20px; text-align: center; border-top: 1px solid var(--divider); max-width: 800px; margin: 0 auto;">
-    <h3 class="font-display" style="font-size: 2rem; margin-bottom: 16px;">Ready to decide?</h3>
-    <p style="font-size: 1.1rem; opacity: 0.9; line-height: 1.6;">When you've found a direction you love, reach out to Kaylee King at Cairn Agency (<a href="tel:4692671358" style="color: inherit; text-decoration: underline; text-underline-offset: 4px; font-weight: 500;">469-267-1358</a>). We'll schedule a call at your convenience to answer any questions and map out our next steps.</p>
+  <section id="next-steps" class="container" style="padding: 80px 20px; text-align: center; border-top: 1px solid var(--divider); max-width: 800px; margin: 0 auto;">
+    <h3 class="font-display" style="font-size: 2rem; margin-bottom: 16px;">Found one you love?</h3>
+    <p style="font-size: 1.1rem; opacity: 0.9; line-height: 1.6;">Bring it to our call on Wednesday — whichever direction you're leaning toward, or a list of questions if you're still weighing them. We'll walk through it together and map out next steps. Want to talk before then? Reach Kaylee King at Cairn Agency anytime: <a href="tel:4692671358" style="color: inherit; text-decoration: underline; text-underline-offset: 4px; font-weight: 500;">469-267-1358</a>.</p>
   </section>
 
   <!-- FOOTER -->
@@ -544,7 +652,7 @@
     <div>
       <p>Prepared by <a href="https://cairnagency.io" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">Cairn Agency</a></p>
     </div>
-    <p>Prepared for SN Beauty &middot; 2026</p>
+    <p>Prepared for SN Beauty Medical Spa &middot; 2026</p>
     <a href="#" class="back-top">Back to top <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg></a>
   </footer>
 
@@ -572,6 +680,24 @@
       });
       
       cards.forEach(card => observer.observe(card));
+      
+      // Slider navigation
+      document.querySelectorAll('.concept-slider-wrapper').forEach(wrapper => {
+        const slider = wrapper.querySelector('.concept-slider');
+        const prevBtn = wrapper.querySelector('.prev-btn');
+        const nextBtn = wrapper.querySelector('.next-btn');
+        
+        if (prevBtn && slider) {
+          prevBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' });
+          });
+        }
+        if (nextBtn && slider) {
+          nextBtn.addEventListener('click', () => {
+            slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' });
+          });
+        }
+      });
     });
   </script>
 </body>
