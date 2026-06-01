@@ -227,28 +227,21 @@
       align-items: center;
       gap: 8px;
     }
+    .concept-slider-wrapper {
+      position: relative;
+    }
     .concept-slider {
       display: flex;
       align-items: flex-start;
       gap: 24px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      padding-bottom: 16px;
       -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(0,0,0,0.2) rgba(0,0,0,0.05);
+      scrollbar-width: none;
       scroll-behavior: smooth;
     }
     .concept-slider::-webkit-scrollbar {
-      height: 8px;
-    }
-    .concept-slider::-webkit-scrollbar-track {
-      background: rgba(0,0,0,0.05);
-      border-radius: 4px;
-    }
-    .concept-slider::-webkit-scrollbar-thumb {
-      background: rgba(0,0,0,0.2);
-      border-radius: 4px;
+      display: none;
     }
     .concept-slide {
       flex: 0 0 100%;
@@ -264,15 +257,15 @@
       display: block;
     }
     .slider-btn-container {
-      position: sticky;
-      top: 50vh;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -24px;
       z-index: 10;
       pointer-events: none;
       display: flex;
       justify-content: space-between;
       width: calc(100% + 48px);
-      margin-left: -24px;
-      margin-bottom: -48px;
     }
     .slider-btn {
       pointer-events: auto;
